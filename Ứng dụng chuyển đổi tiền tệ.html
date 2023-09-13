@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi tiền tệ</title>
+</head>
+<body>
+    <h1>Ứng dụng chuyển đổi tiền tệ</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th><label for="amount">Số tiền:</label></th>
+                <th><label for="fromCurrency">Từ đơn vị tiền tệ:</label></th>
+                <th><label for="toCurrency">Sang đơn vị tiền tệ:</label></th>
+            </tr>
+            <tr>
+                <th><input type="number" id="amount" placeholder="Nhập số tiền" ></th>
+                <th>
+                    <select id="fromCurrency">
+                        <option value="usd">USD</option>
+                        <option value="vnd">VND</option>
+                    </select>
+                </th>
+                <th>    
+                    <select id="toCurrency">
+                        <option value="usd">USD</option>
+                        <option value="vnd">VND</option>
+                    </select>
+                </th>
+                <th><button onclick="convertCurrency()">Chuyển đổi</button> </th>
+            </tr>
+        </tbody>
+    </table>
+
+    <p id="result">Kết quả ở đây</p>
+
+    <script>
+        function convertCurrency() {
+            //Lấy giá trị từ select option
+            let amount = parseFloat(document.getElementById("amount").value);
+            let fromCurrency = document.getElementById("fromCurrency").value;
+            let toCurrency = document.getElementById("toCurrency").value;
+
+            //chuyển đổi
+            let convertedAmount;
+            if (fromCurrency === "usd" && toCurrency === "vnd") {
+                convertedAmount = amount * 24000;
+            } else if (fromCurrency === "vnd" && toCurrency === "usd") {
+                convertedAmount = amount / 24000;
+            } else {
+                convertedAmount=amount;
+            }
+
+            document.getElementById("result").innerHTML = 
+                `${amount} ${fromCurrency.toUpperCase()} = ${convertedAmount} ${toCurrency.toUpperCase()} `; 
+                
+                
+        }
+    </script>
+</body>
+</html>
